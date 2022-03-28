@@ -73,9 +73,27 @@ class Tool
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SBO::class, mappedBy="outillage")
+     */
+    private $sBOs;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="Outillage")
+     */
+    private $controles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="outillage")
+     */
+    private $maintenances;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
+        $this->sBOs = new ArrayCollection();
+        $this->controles = new ArrayCollection();
+        $this->maintenances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,6 +199,96 @@ class Tool
     public function setdescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SBO>
+     */
+    public function getSBOs(): Collection
+    {
+        return $this->sBOs;
+    }
+
+    public function addSBO(SBO $sBO): self
+    {
+        if (!$this->sBOs->contains($sBO)) {
+            $this->sBOs[] = $sBO;
+            $sBO->setOutillage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSBO(SBO $sBO): self
+    {
+        if ($this->sBOs->removeElement($sBO)) {
+            // set the owning side to null (unless already changed)
+            if ($sBO->getOutillage() === $this) {
+                $sBO->setOutillage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Controle>
+     */
+    public function getControles(): Collection
+    {
+        return $this->controles;
+    }
+
+    public function addControle(Controle $controle): self
+    {
+        if (!$this->controles->contains($controle)) {
+            $this->controles[] = $controle;
+            $controle->setOutillage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControle(Controle $controle): self
+    {
+        if ($this->controles->removeElement($controle)) {
+            // set the owning side to null (unless already changed)
+            if ($controle->getOutillage() === $this) {
+                $controle->setOutillage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maintenance>
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenance $maintenance): self
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances[] = $maintenance;
+            $maintenance->setOutillage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenance $maintenance): self
+    {
+        if ($this->maintenances->removeElement($maintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getOutillage() === $this) {
+                $maintenance->setOutillage(null);
+            }
+        }
 
         return $this;
     }

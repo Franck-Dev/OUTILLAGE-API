@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EquipementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,6 +40,22 @@ class Equipement
      * @ORM\Column(type="datetime_immutable")
      */
     private $dateCreation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="Equipement")
+     */
+    private $controles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="Equipement")
+     */
+    private $maintenances;
+
+    public function __construct()
+    {
+        $this->controles = new ArrayCollection();
+        $this->maintenances = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,6 +106,66 @@ class Equipement
     public function setDateCreation(\DateTimeImmutable $dateCreation): self
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Controle>
+     */
+    public function getControles(): Collection
+    {
+        return $this->controles;
+    }
+
+    public function addControle(Controle $controle): self
+    {
+        if (!$this->controles->contains($controle)) {
+            $this->controles[] = $controle;
+            $controle->setEquipement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeControle(Controle $controle): self
+    {
+        if ($this->controles->removeElement($controle)) {
+            // set the owning side to null (unless already changed)
+            if ($controle->getEquipement() === $this) {
+                $controle->setEquipement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Maintenance>
+     */
+    public function getMaintenances(): Collection
+    {
+        return $this->maintenances;
+    }
+
+    public function addMaintenance(Maintenance $maintenance): self
+    {
+        if (!$this->maintenances->contains($maintenance)) {
+            $this->maintenances[] = $maintenance;
+            $maintenance->setEquipement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMaintenance(Maintenance $maintenance): self
+    {
+        if ($this->maintenances->removeElement($maintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($maintenance->getEquipement() === $this) {
+                $maintenance->setEquipement(null);
+            }
+        }
 
         return $this;
     }
