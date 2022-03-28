@@ -59,11 +59,6 @@ class Tool
     private $utilisation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Demandes::class, mappedBy="ToolSAP")
-     */
-    private $demandes;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $programmeAvion;
@@ -90,7 +85,6 @@ class Tool
 
     public function __construct()
     {
-        $this->demandes = new ArrayCollection();
         $this->sBOs = new ArrayCollection();
         $this->controles = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
@@ -149,37 +143,7 @@ class Tool
         return $this;
     }
 
-    /**
-     * @return Collection<int, Demandes>
-     */
-    public function getDemandes(): Collection
-    {
-        return $this->demandes;
-    }
-
-    public function addDemande(Demandes $demande): self
-    {
-        if (!$this->demandes->contains($demande)) {
-            $this->demandes[] = $demande;
-            $demande->setToolSAP($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDemande(Demandes $demande): self
-    {
-        if ($this->demandes->removeElement($demande)) {
-            // set the owning side to null (unless already changed)
-            if ($demande->getToolSAP() === $this) {
-                $demande->setToolSAP(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getprogrammeAvion(): ?string
+      public function getprogrammeAvion(): ?string
     {
         return $this->programmeAvion;
     }

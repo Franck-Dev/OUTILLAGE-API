@@ -20,31 +20,6 @@ class Demandes
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $type;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="demandes")
-     */
-    private $toolSAP;
-
-    /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
-     */
-    private $dateBesoin;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $demandeur;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
@@ -74,69 +49,24 @@ class Demandes
      */
     private $statut;
 
+    /**
+     * @ORM\OneToOne(targetEntity=SBO::class, cascade={"persist", "remove"})
+     */
+    private $sbo;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Controle::class, cascade={"persist", "remove"})
+     */
+    private $controle;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Maintenance::class, cascade={"persist", "remove"})
+     */
+    private $maintenance;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getToolSAP(): ?Tool
-    {
-        return $this->toolSAP;
-    }
-
-    public function setToolSAP(?Tool $toolSAP): self
-    {
-        $this->toolSAP = $toolSAP;
-
-        return $this;
-    }
-
-    public function getDateBesoin(): ?\DateTimeImmutable
-    {
-        return $this->dateBesoin;
-    }
-
-    public function setDateBesoin(?\DateTimeImmutable $dateBesoin): self
-    {
-        $this->dateBesoin = $dateBesoin;
-
-        return $this;
-    }
-
-    public function getDemandeur(): ?string
-    {
-        return $this->demandeur;
-    }
-
-    public function setDemandeur(string $demandeur): self
-    {
-        $this->demandeur = $demandeur;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -207,6 +137,42 @@ class Demandes
     public function setStatut(string $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getSbo(): ?SBO
+    {
+        return $this->sbo;
+    }
+
+    public function setSbo(?SBO $sbo): self
+    {
+        $this->sbo = $sbo;
+
+        return $this;
+    }
+
+    public function getControle(): ?Controle
+    {
+        return $this->controle;
+    }
+
+    public function setControle(?Controle $controle): self
+    {
+        $this->controle = $controle;
+
+        return $this;
+    }
+
+    public function getMaintenance(): ?Maintenance
+    {
+        return $this->maintenance;
+    }
+
+    public function setMaintenance(?Maintenance $maintenance): self
+    {
+        $this->maintenance = $maintenance;
 
         return $this;
     }
