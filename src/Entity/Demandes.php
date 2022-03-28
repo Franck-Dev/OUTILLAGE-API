@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\DemandesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"Dem:read"}},
+ *      denormalizationContext={"groups"={"Dem:write"}},
+ * )
  * @ORM\Entity(repositoryClass=DemandesRepository::class)
  */
 class Demandes
@@ -16,51 +20,61 @@ class Demandes
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Dem:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"Dem:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"Dem:read"})
      */
     private $dateAffectation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Dem:read","Dem:write"})
      */
     private $groupeAffectation;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"Dem:read","Dem:write"})
      */
     private $datePlanif;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"Dem:read","Dem:write"})
      */
     private $dateReal;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Dem:read","Dem:write"})
      */
     private $statut;
 
     /**
      * @ORM\OneToOne(targetEntity=SBO::class, cascade={"persist", "remove"})
+     * @Groups({"Dem:read"})
      */
     private $sbo;
 
     /**
      * @ORM\OneToOne(targetEntity=Controle::class, cascade={"persist", "remove"})
+     * @Groups({"Dem:read"})
      */
     private $controle;
 
     /**
      * @ORM\OneToOne(targetEntity=Maintenance::class, cascade={"persist", "remove"})
+     * @Groups({"Dem:read"})
      */
     private $maintenance;
 

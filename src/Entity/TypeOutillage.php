@@ -5,10 +5,16 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TypeOutillageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"TypeOT:read"}},
+ *      denormalizationContext={"groups"={"TypeOT:write"}},
+ * )
  * @ORM\Entity(repositoryClass=TypeOutillageRepository::class)
+ * @UniqueEntity("libelle")
  */
 class TypeOutillage
 {
@@ -16,11 +22,13 @@ class TypeOutillage
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"TypeOT:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"TypeOT:read","TypeOT:write"})
      */
     private $libelle;
 

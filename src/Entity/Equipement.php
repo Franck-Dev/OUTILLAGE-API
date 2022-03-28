@@ -2,15 +2,22 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\EquipementRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipementRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"Eqmnt:read"}},
+ *      denormalizationContext={"groups"={"Eqmnt:write"}},
+ * )
  * @ORM\Entity(repositoryClass=EquipementRepository::class)
+ * @UniqueEntity("numEquipement")
+ * @UniqueEntity("identification")
  */
 class Equipement
 {
@@ -18,36 +25,43 @@ class Equipement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Eqmnt:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"Eqmnt:read","Eqmnt:write"})
      */
     private $numEquipement;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Eqmnt:read","Eqmnt:write"})
      */
     private $identification;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"Eqmnt:read","Eqmnt:write"})
      */
     private $statut;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"Eqmnt:read"})
      */
     private $dateCreation;
 
     /**
      * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="Equipement")
+     * @Groups({"Eqmnt:read"})
      */
     private $controles;
 
     /**
      * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="Equipement")
+     * @Groups({"Eqmnt:read"})
      */
     private $maintenances;
 

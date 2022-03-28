@@ -5,10 +5,16 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TypeTravailRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"TypeW:read"}},
+ *      denormalizationContext={"groups"={"TypeW:write"}},
+ * )
  * @ORM\Entity(repositoryClass=TypeTravailRepository::class)
+ * @UniqueEntity("libelle")
  */
 class TypeTravail
 {
@@ -16,11 +22,13 @@ class TypeTravail
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"TypeW:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"TypeW:read","TypeW:write"})
      */
     private $libelle;
 

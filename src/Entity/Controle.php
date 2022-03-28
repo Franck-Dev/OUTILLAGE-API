@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ControleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"CT:read"}},
+ *      denormalizationContext={"groups"={"CT:write"}},
+ * )
  * @ORM\Entity(repositoryClass=ControleRepository::class)
  */
 class Controle
@@ -16,59 +20,82 @@ class Controle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"CT:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="controles")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"CT:read","CT:write"})
      */
-    private $Outillage;
+    private $outillage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Equipement::class, inversedBy="controles")
+     * @Groups({"CT:read","CT:write"})
      */
-    private $Equipement;
+    private $equipement;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"CT:read","CT:write"})
      */
     private $dateBesoin;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"CT:read","CT:write"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"CT:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"CT:read"})
      */
     private $modifiedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"CT:read"})
      */
     private $userCreat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read"})
      */
     private $userModif;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
      */
     private $fichier;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $refPlan;
+
+    /**
+     * @ORM\Column(type="string", length=2)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $indPlan;
 
     public function getId(): ?int
     {
@@ -77,24 +104,24 @@ class Controle
 
     public function getOutillage(): ?Tool
     {
-        return $this->Outillage;
+        return $this->outillage;
     }
 
-    public function setOutillage(?Tool $Outillage): self
+    public function setOutillage(?Tool $outillage): self
     {
-        $this->Outillage = $Outillage;
+        $this->outillage = $outillage;
 
         return $this;
     }
 
     public function getEquipement(): ?Equipement
     {
-        return $this->Equipement;
+        return $this->equipement;
     }
 
-    public function setEquipement(?Equipement $Equipement): self
+    public function setEquipement(?Equipement $equipement): self
     {
-        $this->Equipement = $Equipement;
+        $this->equipement = $equipement;
 
         return $this;
     }
@@ -191,6 +218,30 @@ class Controle
     public function setFichier(?string $fichier): self
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    public function getRefPlan(): ?string
+    {
+        return $this->refPlan;
+    }
+
+    public function setRefPlan(string $refPlan): self
+    {
+        $this->refPlan = $refPlan;
+
+        return $this;
+    }
+
+    public function getIndPlan(): ?string
+    {
+        return $this->indPlan;
+    }
+
+    public function setIndPlan(string $indPlan): self
+    {
+        $this->indPlan = $indPlan;
 
         return $this;
     }
