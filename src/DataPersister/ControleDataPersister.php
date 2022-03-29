@@ -35,7 +35,7 @@ class ControleDataPersister implements ContextAwareDataPersisterInterface
     {
         // Si création on renvoie la date de création, sinon la date de bmodification
         if (!$data->getCreatedAt()) {
-            $data->setUpdateAt(new \DateTimeImmutable());
+            $data->setModifiedAt(new \DateTimeImmutable());
         } else {
             $data->setCreatedAt(new \DateTimeImmutable());
         }
