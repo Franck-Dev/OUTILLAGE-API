@@ -60,11 +60,13 @@ class Tool
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"OT:read", "OT:write"})
      */
     private $programmeAvion;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"OT:read", "OT:write"})
      */
     private $description;
 
