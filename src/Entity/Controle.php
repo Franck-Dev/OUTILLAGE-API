@@ -63,13 +63,13 @@ class Controle
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"CT:read"})
+     * @Groups({"CT:read","CT:write"})
      */
     private $userCreat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"CT:read"})
+     * @Groups({"CT:read","CT:write"})
      */
     private $userModif;
 
