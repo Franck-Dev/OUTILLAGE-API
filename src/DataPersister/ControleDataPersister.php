@@ -34,7 +34,7 @@ class ControleDataPersister implements ContextAwareDataPersisterInterface
     public function persist($data, array $context = [])
     {
         // Si création on renvoie la date de création, sinon la date de bmodification
-        if (!$data->getCreatedAt()) {
+        if ($data->getCreatedAt()) {
             $data->setModifiedAt(new \DateTimeImmutable());
         } else {
             $data->setCreatedAt(new \DateTimeImmutable());
