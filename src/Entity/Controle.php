@@ -97,6 +97,48 @@ class Controle
      */
     private $indPlan;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $cheminCAO;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $detailsControle;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $tolerances;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $dispoOut;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $typeRapport;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $moyenMesure;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $infosComplementaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -242,6 +284,90 @@ class Controle
     public function setIndPlan(string $indPlan): self
     {
         $this->indPlan = $indPlan;
+
+        return $this;
+    }
+
+    public function getCheminCAO(): ?string
+    {
+        return $this->cheminCAO;
+    }
+
+    public function setCheminCAO(?string $cheminCAO): self
+    {
+        $this->cheminCAO = $cheminCAO;
+
+        return $this;
+    }
+
+    public function getDetailsControle(): ?string
+    {
+        return $this->detailsControle;
+    }
+
+    public function setDetailsControle(?string $detailsControle): self
+    {
+        $this->detailsControle = $detailsControle;
+
+        return $this;
+    }
+
+    public function getTolerances(): ?string
+    {
+        return $this->tolerances;
+    }
+
+    public function setTolerances(?string $tolerances): self
+    {
+        $this->tolerances = $tolerances;
+
+        return $this;
+    }
+
+    public function getDispoOut(): ?\DateTimeImmutable
+    {
+        return $this->dispoOut;
+    }
+
+    public function setDispoOut(?\DateTimeImmutable $dispoOut): self
+    {
+        $this->dispoOut = $dispoOut;
+
+        return $this;
+    }
+
+    public function getTypeRapport(): ?string
+    {
+        return $this->typeRapport;
+    }
+
+    public function setTypeRapport(?string $typeRapport): self
+    {
+        $this->typeRapport = $typeRapport;
+
+        return $this;
+    }
+
+    public function getMoyenMesure(): ?string
+    {
+        return $this->moyenMesure;
+    }
+
+    public function setMoyenMesure(?string $moyenMesure): self
+    {
+        $this->moyenMesure = $moyenMesure;
+
+        return $this;
+    }
+
+    public function getInfosComplementaire(): ?string
+    {
+        return $this->infosComplementaire;
+    }
+
+    public function setInfosComplementaire(?string $infosComplementaire): self
+    {
+        $this->infosComplementaire = $infosComplementaire;
 
         return $this;
     }
