@@ -4,12 +4,12 @@
 
 namespace App\DataPersister;
 
-use App\Entity\Controle;
+use App\Entity\SBO;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Services\GestDemande;
 
-class ControleDataPersister implements ContextAwareDataPersisterInterface
+class SBODataPersister implements ContextAwareDataPersisterInterface
 {
     /**
      * @var EntityManagerInterface
@@ -29,7 +29,7 @@ class ControleDataPersister implements ContextAwareDataPersisterInterface
     
     public function supports($data, array $context = []): bool
     {
-        return $data instanceof Controle;
+        return $data instanceof SBO;
         
     }
 
