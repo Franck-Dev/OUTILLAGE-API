@@ -28,7 +28,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Tool
 {
     /**
-     * @Groups({"OT:read"})
+     * @Groups({"OT:read","Dem:read"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -36,13 +36,13 @@ class Tool
     private $id;
 
     /**
-     * @Groups({"OT:read", "OT:write"})
+     * @Groups({"OT:read", "OT:write","Dem:read"})
      * @ORM\Column(type="integer", unique=true)
      */
     private $sapToolNumber;
 
     /**
-     * @Groups({"OT:read", "OT:write"})
+     * @Groups({"OT:read", "OT:write","Dem:read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $designation;

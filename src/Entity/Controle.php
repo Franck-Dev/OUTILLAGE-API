@@ -20,32 +20,32 @@ class Controle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"CT:read"})
+     * @Groups({"CT:read","Dem:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="controles")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read","CT:write","Dem:read"})
      */
     private $outillage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Equipement::class, inversedBy="controles")
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read","CT:write","Dem:read"})
      */
     private $equipement;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read","CT:write","Dem:read"})
      */
     private $dateBesoin;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read","CT:write","Dem:read"})
      */
     private $description;
 
@@ -63,7 +63,7 @@ class Controle
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read","CT:write","Dem:read"})
      */
     private $userCreat;
 
