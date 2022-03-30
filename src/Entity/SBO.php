@@ -5,9 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\SBORepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"SBO:read"}},
+ *      denormalizationContext={"groups"={"SBO:write"}},)
  * @ORM\Entity(repositoryClass=SBORepository::class)
  */
 class SBO
@@ -16,36 +19,43 @@ class SBO
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"SBO:read","Dem:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="sBOs")
+     * @Groups({"SBO:read","SBO:write","Dem:read"})
      */
     private $outillage;
 
     /**
      * @ORM\Column(type="string", length=2)
+     * @Groups({"SBO:read","SBO:write"})
      */
     private $indice;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"SBO:read","SBO:write"})
      */
     private $identification;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"SBO:read","SBO:write","Dem:read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"SBO:read","SBO:write","Dem:read"})
      */
     private $dateBesoin;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"SBO:read","SBO:write"})
      */
     private $image;
 
@@ -61,16 +71,19 @@ class SBO
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"SBO:read","SBO:write","Dem:read"})
      */
     private $userCreat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"SBO:read","SBO:write"})
      */
     private $userModif;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"SBO:read","SBO:write","Dem:read"})
      */
     private $fichier;
 

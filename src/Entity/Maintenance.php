@@ -5,9 +5,13 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MaintenanceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      normalizationContext={"groups"={"Maint:read"}},
+ *      denormalizationContext={"groups"={"Maint:write"}},
+ * )
  * @ORM\Entity(repositoryClass=MaintenanceRepository::class)
  */
 class Maintenance
@@ -16,56 +20,67 @@ class Maintenance
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Maint:read","Dem:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="maintenances")
+     * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $outillage;
 
     /**
      * @ORM\ManyToOne(targetEntity=Equipement::class, inversedBy="maintenances")
+     * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $Equipement;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $dateBesoin;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"Maint:read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"Maint:read"})
      */
     private $modifiedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $userCreat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Maint:read"})
      */
     private $userModif;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
      */
     private $fichier;
 
