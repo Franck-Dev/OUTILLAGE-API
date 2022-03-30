@@ -43,10 +43,10 @@ class Maintenance
     private $dateBesoin;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="array")
      * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
-    private $description;
+    private $nonConformite;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -83,6 +83,66 @@ class Maintenance
      * @Groups({"Maint:read","Maint:write"})
      */
     private $fichier;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $sigle;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $causeDem;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $actionsCorrectives = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $userValideur;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $dateValid;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $respo;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $delaiAction = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $userReal = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $dateReal = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $rep = [];
 
     public function getId(): ?int
     {
@@ -125,14 +185,14 @@ class Maintenance
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getNonConformite(): ?string
     {
-        return $this->description;
+        return $this->nonConformite;
     }
 
-    public function setDescription(string $description): self
+    public function setNonConformite(string $nonConformite): self
     {
-        $this->description = $description;
+        $this->nonConformite = $nonConformite;
 
         return $this;
     }
@@ -205,6 +265,126 @@ class Maintenance
     public function setFichier(?string $fichier): self
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    public function getSigle(): ?string
+    {
+        return $this->sigle;
+    }
+
+    public function setSigle(?string $sigle): self
+    {
+        $this->sigle = $sigle;
+
+        return $this;
+    }
+
+    public function getCauseDem(): ?string
+    {
+        return $this->causeDem;
+    }
+
+    public function setCauseDem(string $causeDem): self
+    {
+        $this->causeDem = $causeDem;
+
+        return $this;
+    }
+
+    public function getActionsCorrectives(): ?array
+    {
+        return $this->actionsCorrectives;
+    }
+
+    public function setActionsCorrectives(?array $actionsCorrectives): self
+    {
+        $this->actionsCorrectives = $actionsCorrectives;
+
+        return $this;
+    }
+
+    public function getUserValideur(): ?string
+    {
+        return $this->userValideur;
+    }
+
+    public function setUserValideur(?string $userValideur): self
+    {
+        $this->userValideur = $userValideur;
+
+        return $this;
+    }
+
+    public function getDateValid(): ?\DateTimeImmutable
+    {
+        return $this->dateValid;
+    }
+
+    public function setDateValid(?\DateTimeImmutable $dateValid): self
+    {
+        $this->dateValid = $dateValid;
+
+        return $this;
+    }
+
+    public function getRespo(): ?array
+    {
+        return $this->respo;
+    }
+
+    public function setRespo(?array $respo): self
+    {
+        $this->respo = $respo;
+
+        return $this;
+    }
+
+    public function getDelaiAction(): ?array
+    {
+        return $this->delaiAction;
+    }
+
+    public function setDelaiAction(?array $delaiAction): self
+    {
+        $this->delaiAction = $delaiAction;
+
+        return $this;
+    }
+
+    public function getUserReal(): ?array
+    {
+        return $this->userReal;
+    }
+
+    public function setUserReal(?array $userReal): self
+    {
+        $this->userReal = $userReal;
+
+        return $this;
+    }
+
+    public function getDateReal(): ?array
+    {
+        return $this->dateReal;
+    }
+
+    public function setDateReal(?array $dateReal): self
+    {
+        $this->dateReal = $dateReal;
+
+        return $this;
+    }
+
+    public function getRep(): ?array
+    {
+        return $this->rep;
+    }
+
+    public function setRep(?array $rep): self
+    {
+        $this->rep = $rep;
 
         return $this;
     }
