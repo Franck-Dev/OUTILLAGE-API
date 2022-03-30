@@ -139,6 +139,18 @@ class Controle
      */
     private $infosComplementaire;
 
+    /**
+     * @ORM\Column(type="string", length=15)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $ligneBudgetaire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"CT:read","CT:write"})
+     */
+    private $visaControleur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -368,6 +380,30 @@ class Controle
     public function setInfosComplementaire(?string $infosComplementaire): self
     {
         $this->infosComplementaire = $infosComplementaire;
+
+        return $this;
+    }
+
+    public function getLigneBudgetaire(): ?string
+    {
+        return $this->ligneBudgetaire;
+    }
+
+    public function setLigneBudgetaire(string $ligneBudgetaire): self
+    {
+        $this->ligneBudgetaire = $ligneBudgetaire;
+
+        return $this;
+    }
+
+    public function getVisaControleur(): ?string
+    {
+        return $this->visaControleur;
+    }
+
+    public function setVisaControleur(?string $visaControleur): self
+    {
+        $this->visaControleur = $visaControleur;
 
         return $this;
     }
