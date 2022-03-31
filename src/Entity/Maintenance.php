@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\MaintenanceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -91,18 +93,6 @@ class Maintenance
     private $sigle;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"Maint:read","Maint:write"})
-     */
-    private $causeDem;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"Maint:read","Maint:write"})
-     */
-    private $actionsCorrectives = [];
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"Maint:read","Maint:write"})
      */
@@ -118,31 +108,18 @@ class Maintenance
      * @ORM\Column(type="array", nullable=true)
      * @Groups({"Maint:read","Maint:write"})
      */
-    private $respo;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"Maint:read","Maint:write"})
-     */
-    private $delaiAction = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"Maint:read","Maint:write"})
-     */
-    private $userReal = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"Maint:read","Maint:write"})
-     */
-    private $dateReal = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"Maint:read","Maint:write"})
-     */
     private $rep = [];
+
+    /**
+     * @ORM\ManyToMany(targetEntity=MaintenanceItems::class, inversedBy="maintenances")
+     * @Groups({"Maint:read","Maint:write"})
+     */
+    private $itemActionCorrective;
+
+    public function __construct()
+    {
+        $this->itemActionCorrective = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -281,30 +258,6 @@ class Maintenance
         return $this;
     }
 
-    public function getCauseDem(): ?string
-    {
-        return $this->causeDem;
-    }
-
-    public function setCauseDem(string $causeDem): self
-    {
-        $this->causeDem = $causeDem;
-
-        return $this;
-    }
-
-    public function getActionsCorrectives(): ?array
-    {
-        return $this->actionsCorrectives;
-    }
-
-    public function setActionsCorrectives(?array $actionsCorrectives): self
-    {
-        $this->actionsCorrectives = $actionsCorrectives;
-
-        return $this;
-    }
-
     public function getUserValideur(): ?string
     {
         return $this->userValideur;
@@ -329,54 +282,6 @@ class Maintenance
         return $this;
     }
 
-    public function getRespo(): ?array
-    {
-        return $this->respo;
-    }
-
-    public function setRespo(?array $respo): self
-    {
-        $this->respo = $respo;
-
-        return $this;
-    }
-
-    public function getDelaiAction(): ?array
-    {
-        return $this->delaiAction;
-    }
-
-    public function setDelaiAction(?array $delaiAction): self
-    {
-        $this->delaiAction = $delaiAction;
-
-        return $this;
-    }
-
-    public function getUserReal(): ?array
-    {
-        return $this->userReal;
-    }
-
-    public function setUserReal(?array $userReal): self
-    {
-        $this->userReal = $userReal;
-
-        return $this;
-    }
-
-    public function getDateReal(): ?array
-    {
-        return $this->dateReal;
-    }
-
-    public function setDateReal(?array $dateReal): self
-    {
-        $this->dateReal = $dateReal;
-
-        return $this;
-    }
-
     public function getRep(): ?array
     {
         return $this->rep;
@@ -385,6 +290,30 @@ class Maintenance
     public function setRep(?array $rep): self
     {
         $this->rep = $rep;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MaintenanceItems>
+     */
+    public function getItemActionCorrective(): Collection
+    {
+        return $this->itemActionCorrective;
+    }
+
+    public function addItemActionCorrective(MaintenanceItems $itemActionCorrective): self
+    {
+        if (!$this->itemActionCorrective->contains($itemActionCorrective)) {
+            $this->itemActionCorrective[] = $itemActionCorrective;
+        }
+
+        return $this;
+    }
+
+    public function removeItemActionCorrective(MaintenanceItems $itemActionCorrective): self
+    {
+        $this->itemActionCorrective->removeElement($itemActionCorrective);
 
         return $this;
     }
