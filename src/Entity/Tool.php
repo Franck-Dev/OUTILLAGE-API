@@ -36,7 +36,7 @@ class Tool
     private $id;
 
     /**
-     * @Groups({"OT:read", "OT:write","Dem:read"})
+     * @Groups({"OT:read", "OT:write","Dem:read","CT:read"})
      * @ORM\Column(type="integer", unique=true)
      */
     private $sapToolNumber;

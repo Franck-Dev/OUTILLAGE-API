@@ -31,7 +31,7 @@ class Equipement
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read"})
+     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read"})
      */
     private $numEquipement;
 

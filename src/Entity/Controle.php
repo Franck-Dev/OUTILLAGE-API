@@ -11,6 +11,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ApiResource(
  *      normalizationContext={"groups"={"CT:read"}},
  *      denormalizationContext={"groups"={"CT:write"}},
+ *      collectionOperations={
+ *              "get",
+ *              "post"
+ *      },
+ *      itemOperations={"get","put","patch","delete"},
+ *      order={"id" ="DESC"}
  * )
  * @ORM\Entity(repositoryClass=ControleRepository::class)
  */
