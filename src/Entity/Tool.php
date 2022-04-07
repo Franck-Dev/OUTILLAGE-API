@@ -54,6 +54,7 @@ class Tool
     private $identification;
 
     /**
+     * @Groups({"OT:read", "OT:write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $utilisation;
