@@ -43,7 +43,7 @@ class Equipement
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"Eqmnt:read","Eqmnt:write"})
+     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read"})
      */
     private $statut;
 
@@ -54,16 +54,27 @@ class Equipement
     private $dateCreation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="Equipement")
+     * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="equipement")
      * @Groups({"Eqmnt:read"})
      */
     private $controles;
 
     /**
-     * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="Equipement")
+     * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="equipement")
      * @Groups({"Eqmnt:read"})
      */
     private $maintenances;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Eqmnt:read"})
+     */
+    private $site;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Tool::class, inversedBy="equipemnt")
+     */
+    private $tool;
 
     public function __construct()
     {
@@ -180,6 +191,30 @@ class Equipement
                 $maintenance->setEquipement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSite(): ?string
+    {
+        return $this->site;
+    }
+
+    public function setSite(?string $site): self
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    public function getTool(): ?Tool
+    {
+        return $this->tool;
+    }
+
+    public function setTool(?Tool $tool): self
+    {
+        $this->tool = $tool;
 
         return $this;
     }

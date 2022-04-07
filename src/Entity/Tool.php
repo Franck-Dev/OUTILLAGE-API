@@ -92,11 +92,18 @@ class Tool
      */
     private $secteur;
 
+    /**
+     * @ORM\OneToMany(targetEntity=equipement::class, mappedBy="tool")
+     * @Groups({"OT:read","Dem:read"})
+     */
+    private $equipemnt;
+
     public function __construct()
     {
         $this->sBOs = new ArrayCollection();
         $this->controles = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
+        $this->equipemnt = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,6 +281,36 @@ class Tool
     public function setSecteur(string $secteur): self
     {
         $this->secteur = $secteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, equipement>
+     */
+    public function getEquipemnt(): Collection
+    {
+        return $this->equipemnt;
+    }
+
+    public function addEquipemnt(equipement $equipemnt): self
+    {
+        if (!$this->equipemnt->contains($equipemnt)) {
+            $this->equipemnt[] = $equipemnt;
+            $equipemnt->setTool($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipemnt(equipement $equipemnt): self
+    {
+        if ($this->equipemnt->removeElement($equipemnt)) {
+            // set the owning side to null (unless already changed)
+            if ($equipemnt->getTool() === $this) {
+                $equipemnt->setTool(null);
+            }
+        }
 
         return $this;
     }
