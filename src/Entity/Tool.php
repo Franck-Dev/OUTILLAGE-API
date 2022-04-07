@@ -42,7 +42,7 @@ class Tool
     private $sapToolNumber;
 
     /**
-     * @Groups({"OT:read", "OT:write"})
+     * @Groups({"OT:read", "OT:write","Dem:read"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $designation;
@@ -84,6 +84,12 @@ class Tool
      * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="outillage")
      */
     private $maintenances;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"OT:read", "OT:write","Dem:read"})
+     */
+    private $secteur;
 
     public function __construct()
     {
@@ -255,6 +261,18 @@ class Tool
                 $maintenance->setOutillage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSecteur(): ?string
+    {
+        return $this->secteur;
+    }
+
+    public function setSecteur(string $secteur): self
+    {
+        $this->secteur = $secteur;
 
         return $this;
     }
