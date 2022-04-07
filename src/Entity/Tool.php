@@ -42,7 +42,7 @@ class Tool
     private $sapToolNumber;
 
     /**
-     * @Groups({"OT:read", "OT:write","Dem:read"})
+     * @Groups({"OT:read", "OT:write"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $designation;

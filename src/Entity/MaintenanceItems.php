@@ -64,7 +64,6 @@ class MaintenanceItems
 
     /**
      * @ORM\ManyToMany(targetEntity=Maintenance::class, mappedBy="itemActionCorrective")
-     * @Groups({"ItemMaint:read","ItemMaint:write","Maint:read"})
      */
     private $maintenances;
 

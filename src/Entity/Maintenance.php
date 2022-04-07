@@ -36,19 +36,13 @@ class Maintenance
      * @ORM\ManyToOne(targetEntity=Equipement::class, inversedBy="maintenances")
      * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
-    private $Equipement;
+    private $equipement;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Groups({"Maint:read","Maint:write","Dem:read"})
      */
     private $dateBesoin;
-
-    /**
-     * @ORM\Column(type="array")
-     * @Groups({"Maint:read","Maint:write","Dem:read"})
-     */
-    private $nonConformite;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -140,12 +134,12 @@ class Maintenance
 
     public function getEquipement(): ?Equipement
     {
-        return $this->Equipement;
+        return $this->equipement;
     }
 
-    public function setEquipement(?Equipement $Equipement): self
+    public function setEquipement(?Equipement $equipement): self
     {
-        $this->Equipement = $Equipement;
+        $this->equipement = $equipement;
 
         return $this;
     }
@@ -158,18 +152,6 @@ class Maintenance
     public function setDateBesoin(\DateTimeImmutable $dateBesoin): self
     {
         $this->dateBesoin = $dateBesoin;
-
-        return $this;
-    }
-
-    public function getNonConformite(): ?string
-    {
-        return $this->nonConformite;
-    }
-
-    public function setNonConformite(string $nonConformite): self
-    {
-        $this->nonConformite = $nonConformite;
 
         return $this;
     }

@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\DemandesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DemandesRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ApiResource(
  *      normalizationContext={"groups"={"Dem:read"}},
  *      denormalizationContext={"groups"={"Dem:write"}},
+ * )
+ * @ApiFilter(
+ *      SearchFilter::class,
+ *          properties={"statut" : "exact","createdAt" : "exact"}
  * )
  * @ORM\Entity(repositoryClass=DemandesRepository::class)
  */
