@@ -93,7 +93,7 @@ class Tool
     private $secteur;
 
     /**
-     * @ORM\OneToMany(targetEntity=equipement::class, mappedBy="tool")
+     * @ORM\OneToMany(targetEntity=Equipement::class, mappedBy="tool")
      * @Groups({"OT:read","Dem:read"})
      */
     private $equipemnt;
