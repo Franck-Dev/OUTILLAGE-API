@@ -25,7 +25,7 @@ class Equipement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Eqmnt:read","Dem:read"})
+     * @Groups({"Eqmnt:read","Dem:read","CT:read"})
      */
     private $id;
 
@@ -37,7 +37,7 @@ class Equipement
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read"})
+     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read"})
      */
     private $identification;
 
