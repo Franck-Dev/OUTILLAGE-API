@@ -84,6 +84,29 @@ class Demandes
      */
     private $maintenance;
 
+    /**
+     * @Groups({"Dem:read"})
+     */
+    private $type;
+ 
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getType(): string
+    {
+ 
+        //Trouve le type de demande lié (Controle, Maintenance ou SBO)
+        if(!$this->controle) {
+            $type="Controle";
+        } elseif(!$this->maintenance){
+            $type="Maintenance";
+        } else {
+            $type="SBO";
+        }
+        return $this->type = $type;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
