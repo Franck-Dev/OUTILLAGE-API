@@ -25,19 +25,19 @@ class Equipement
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Eqmnt:read","Dem:read","CT:read"})
+     * @Groups({"Eqmnt:read","Dem:read","CT:read","Maint:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read"})
+     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read","Maint:read"})
      */
     private $numEquipement;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read"})
+     * @Groups({"Eqmnt:read","Eqmnt:write","Dem:read","CT:read","Maint:read"})
      */
     private $identification;
 
