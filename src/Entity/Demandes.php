@@ -95,11 +95,10 @@ class Demandes
      */
     public function getType(): string
     {
- 
         //Trouve le type de demande lié (Controle, Maintenance ou SBO)
-        if(!$this->controle) {
+        if($this->getControle()) {
             $type="Controle";
-        } elseif(!$this->maintenance){
+        } elseif($this->getMaintenance()){
             $type="Maintenance";
         } else {
             $type="SBO";
