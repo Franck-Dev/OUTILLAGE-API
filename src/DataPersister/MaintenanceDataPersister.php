@@ -36,7 +36,7 @@ class MaintenanceDataPersister implements ContextAwareDataPersisterInterface
     public function persist($data, array $context = [])
     {
         // Si création on renvoie la date de création, sinon la date de modification
-        if ($context['collection_operation_name'] === 'post') {
+        if (!$data->getCreatedAt()) {
             $data->setCreatedAt(new \DateTimeImmutable());
             $this->_demande->NewDemande($data);
 
