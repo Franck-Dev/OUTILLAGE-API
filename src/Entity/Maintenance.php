@@ -111,7 +111,7 @@ class Maintenance
     private $itemActionCorrective;
 
     /**
-     * @Groups({"Dem:read"})
+     * @Groups({"Maint:read", "Dem:read"})
      */
     private $demandeur;
 

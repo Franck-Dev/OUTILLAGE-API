@@ -8,8 +8,10 @@ use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ContextAwareCollectionDataProviderInterface;
 use App\Entity\Demandes;
+use App\Entity\Maintenance;
 use App\Entity\MaintenanceItems;
 use App\Services\CallApiService;
+use Doctrine\ORM\Query\AST\NewObjectExpression;
 
 final class ControleCollectionDataProvider implements ContextAwareCollectionDataProviderInterface, RestrictedDataProviderInterface
 {
@@ -54,29 +56,34 @@ final class ControleCollectionDataProvider implements ContextAwareCollectionData
         foreach ($datas as $item) {
             switch ($resourceClass) {
                 case Controle::class:
-                    $user=$this->callAPIService->getDatas($item->getUserCreat());
+                    $user=$this->callAPIService->getDatas($item->getUserCreat(),false);
                     $item->setDemandeur($user);
                     break;
                 case Maintenance::class:
-                    $user=$this->callAPIService->getDatas($item->getUserCreat());
+                    $user=$this->callAPIService->getDatas($item->getUserCreat(),false);
                     $item->setDemandeur($user);
-                    $user=$this->callAPIService->getDatas($item->getUserValideur());
+                    $user=$this->callAPIService->getDatas($item->getUserValideur(),false);
                     $item->setValideur($user);
                     break;
                 case MaintenanceItems::class:
-                    $user=$this->callAPIService->getDatas($item->getUserReal());
+                    $user=$this->callAPIService->getDatas($item->getUserReal(),false);
                     $item->setRealisateur($user);
                     break;
                 case SBO::class:
-                    $user=$this->callAPIService->getDatas($item->getUserCreat());
+                    $user=$this->callAPIService->getDatas($item->getUserCreat(),false);
                     $item->setDemandeur($user);
                     break;
                 case Demandes::class:
-                    $groupe=$this->callAPIService->getDatas('api/groupe_affectations/2');
+                    //Gestion du groupe d'affectation avec les users
+                    $groupe=$this->callAPIService->getDatas('/api/groupe_affectations/2',false);
+                    $users=[];
                     foreach ($groupe['population'] as $user=>$iri) {
-                        $users[]=$this->callAPIService->getDatas(substr($iri, 1, 30));
+                        $users[]=$this->callAPIService->getDatas(substr($iri, 1, 30),true);
                     }
                     $item->setAffectation($users);
+                    //Gestion des sous-objets pour les users suivant type de demande
+                    $method='get'.$item->getType();
+                    $item->$method()->setDemandeur($this->callAPIService->getDatas($item->$method()->getUserCreat(),false));
                     break;
                 default:
                     break;

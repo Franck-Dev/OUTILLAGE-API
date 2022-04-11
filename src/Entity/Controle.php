@@ -158,7 +158,7 @@ class Controle
     private $visaControleur;
     
     /**
-    *@Groups({"CT:read"})
+    *@Groups({"CT:read","Dem:read"})
     */
     private $demandeur;
 

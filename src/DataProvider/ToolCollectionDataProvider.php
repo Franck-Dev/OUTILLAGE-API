@@ -43,13 +43,13 @@ final class ToolCollectionDataProvider implements ContextAwareCollectionDataProv
         foreach ($datas as $item) {
             switch ($resourceClass) {
                 case Tool::class:
-                    $prog=$this->callAPIService->getDatas($item->getprogrammeAvion());
+                    $prog=$this->callAPIService->getDatas($item->getprogrammeAvion(),false);
                     $item->setProgramme($prog);
-                    $div=$this->callAPIService->getDatas($item->getSecteur());
+                    $div=$this->callAPIService->getDatas($item->getSecteur(),false);
                     $item->setDivision($div);
                     break;
                 case Equipement::class:
-                    $site=$this->callAPIService->getDatas($item->getSite());
+                    $site=$this->callAPIService->getDatas($item->getSite(),false);
                     $item->setSiteUtil($site);
                     break;
                 default:

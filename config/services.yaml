@@ -30,5 +30,8 @@ services:
             $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
     App\DataProvider\ToolCollectionDataProvider:
         bind:
-            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'           
+            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+    App\DataProvider\ControleItemDataProvider:
+        bind:
+            $itemDataProvider: '@api_platform.doctrine.orm.default.item_data_provider'           
     

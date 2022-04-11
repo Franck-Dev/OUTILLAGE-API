@@ -22,12 +22,22 @@ class CallApiService
      * @param  string $url
      * @return array
      */
-    public function getDatas($url=null): array
+    public function getDatas($url=null, bool $pathAPIExter): array
     {
-        //$projectDir = $this->params->get('app.contents_dir');;
+        //Gestion de la construction de la requete API svt envirronements
+        if ($pathAPIExter == false)
+        {
+            $path=$_ENV['APP_SERVER'];
+        } elseif ($_ENV['APP_ENV'] == 'dev')
+        {
+            //$path=$_SERVER['SYMFONY_PROJECT_DEFAULT_ROUTE_URL'];
+            $path='http://127.0.0.1:8000/';
+        } else {
+            $path='http://localhost:83';
+        }
         $response = $this->client->request(
             'GET',
-            $_SERVER['SYMFONY_PROJECT_DEFAULT_ROUTE_URL'].$url
+            $path.$url
         );
 
         return $response->toArray();
