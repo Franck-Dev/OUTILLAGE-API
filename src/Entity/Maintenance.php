@@ -110,9 +110,43 @@ class Maintenance
      */
     private $itemActionCorrective;
 
+    /**
+     * @Groups({"Dem:read"})
+     */
+    private $demandeur;
+
+    /**
+     * @Groups({"Dem:read"})
+     */
+    private $valideur;
+
     public function __construct()
     {
         $this->itemActionCorrective = new ArrayCollection();
+    }
+
+    public function getDemandeur(): ?array
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(array $demandeur)
+    {
+        $this->demandeur = $demandeur;
+
+        return $this;
+    }
+
+    public function getValideur(): ?array
+    {
+        return $this->valideur;
+    }
+
+    public function setValideur(array $valideur)
+    {
+        $this->valideur = $valideur;
+
+        return $this;
     }
 
     public function getId(): ?int

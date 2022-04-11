@@ -76,10 +76,27 @@ class Equipement
      */
     private $tool;
 
+    /**
+     * @Groups({"Eqmnt:read"})
+     */
+    private $siteUtil;
+
     public function __construct()
     {
         $this->controles = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
+    }
+
+    public function getSiteUtil(): ?array
+    {
+        return $this->siteUtil;
+    }
+
+    public function setSiteUtil(array $siteUtil)
+    {
+        $this->siteUtil = $siteUtil;
+
+        return $this;
     }
 
     public function getId(): ?int

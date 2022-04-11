@@ -156,6 +156,23 @@ class Controle
      * @Groups({"CT:read","CT:write"})
      */
     private $visaControleur;
+    
+    /**
+    *@Groups({"CT:read"})
+    */
+    private $demandeur;
+
+    public function getDemandeur(): ?array
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(array $demandeur)
+    {
+        $this->demandeur = $demandeur;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

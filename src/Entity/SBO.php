@@ -87,6 +87,23 @@ class SBO
      */
     private $fichier;
 
+        /**
+    *@Groups({"SBO:read"})
+    */
+    private $demandeur;
+
+    public function getDemandeur(): ?array
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(array $demandeur)
+    {
+        $this->demandeur = $demandeur;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

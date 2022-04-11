@@ -98,12 +98,46 @@ class Tool
      */
     private $equipemnt;
 
+    /**
+     * @Groups({"OT:read"})
+     */
+    private $programme;
+
+    /**
+     * @Groups({"OT:read"})
+     */
+    private $division;
+
     public function __construct()
     {
         $this->sBOs = new ArrayCollection();
         $this->controles = new ArrayCollection();
         $this->maintenances = new ArrayCollection();
         $this->equipemnt = new ArrayCollection();
+    }
+
+    public function getProgramme(): ?array
+    {
+        return $this->programme;
+    }
+
+    public function setProgramme(array $programme)
+    {
+        $this->programme = $programme;
+
+        return $this;
+    }
+
+    public function getDivision(): ?array
+    {
+        return $this->division;
+    }
+
+    public function setDivision(array $division)
+    {
+        $this->division = $division;
+
+        return $this;
     }
 
     public function getId(): ?int

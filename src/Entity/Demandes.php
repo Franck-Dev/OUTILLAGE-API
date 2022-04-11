@@ -88,6 +88,23 @@ class Demandes
      * @Groups({"Dem:read"})
      */
     private $type;
+
+        /**
+    *@Groups({"Dem:read"})
+    */
+    private $affectation;
+
+    public function getAffectation(): ?array
+    {
+        return $this->affectation;
+    }
+
+    public function setAffectation(array $affectation)
+    {
+        $this->affectation = $affectation;
+
+        return $this;
+    }
  
     /**
      * @return string

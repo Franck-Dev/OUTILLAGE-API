@@ -67,9 +67,26 @@ class MaintenanceItems
      */
     private $maintenances;
 
+    /**
+     * @Groups({"ItemMaint:read"})
+     */
+    private $realisateur;
+
     public function __construct()
     {
         $this->maintenances = new ArrayCollection();
+    }
+
+    public function getRealisateur(): ?string
+    {
+        return $this->realisateur;
+    }
+
+    public function setRealisateur(string $realisateur): self
+    {
+        $this->secteur = $realisateur;
+
+        return $this;
     }
 
     public function getId(): ?int
