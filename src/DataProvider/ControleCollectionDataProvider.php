@@ -78,7 +78,7 @@ final class ControleCollectionDataProvider implements ContextAwareCollectionData
                     $groupe=$this->callAPIService->getDatas('/api/groupe_affectations/2',false);
                     $users=[];
                     foreach ($groupe['population'] as $user=>$iri) {
-                        $users[]=$this->callAPIService->getDatas(substr($iri, 1, 30),true);
+                        $users[]=$this->callAPIService->getDatas($iri,true);
                     }
                     $item->setAffectation($users);
                     //Gestion des sous-objets pour les users suivant type de demande

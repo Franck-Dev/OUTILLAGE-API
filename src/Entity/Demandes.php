@@ -89,7 +89,7 @@ class Demandes
      */
     private $type;
 
-        /**
+    /**
     *@Groups({"Dem:read"})
     */
     private $affectation;
