@@ -61,7 +61,7 @@ class Tool
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"OT:read", "OT:write"})
+     * @Groups({"OT:write"})
      */
     private $programmeAvion;
 
@@ -88,7 +88,7 @@ class Tool
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"OT:read", "OT:write","Dem:read"})
+     * @Groups({"OT:write","Dem:read"})
      */
     private $secteur;
 
