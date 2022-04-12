@@ -55,13 +55,11 @@ class Equipement
 
     /**
      * @ORM\OneToMany(targetEntity=Controle::class, mappedBy="equipement")
-     * @Groups({"Eqmnt:read"})
      */
     private $controles;
 
     /**
      * @ORM\OneToMany(targetEntity=Maintenance::class, mappedBy="equipement")
-     * @Groups({"Eqmnt:read"})
      */
     private $maintenances;
 

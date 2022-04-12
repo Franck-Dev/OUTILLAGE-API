@@ -87,12 +87,15 @@ final class ControleCollectionDataProvider implements ContextAwareCollectionData
                     break;
                 case Demandes::class:
                     //Gestion du groupe d'affectation avec les users
-                    $groupe=$this->callAPIService->getDatas('/api/groupe_affectations/2',false);
-                    $users=[];
-                    foreach ($groupe['population'] as $user=>$iri) {
-                        $users[]=$this->callAPIService->getDatas($iri,true);
+                    if ($item->getGroupeAffectation())
+                    {
+                        $groupe=$this->callAPIService->getDatas($item->getGroupeAffectation(),false);
+                        $users=[];
+                        foreach ($groupe['population'] as $user=>$iri) {
+                            $users[]=$this->callAPIService->getDatas($iri,true);
+                        }
+                        $item->setAffectation($users);
                     }
-                    $item->setAffectation($users);
                     //Gestion des sous-objets pour les users suivant type de demande
                     $method='get'.$item->getType();
                     $item->$method()->setDemandeur($this->callAPIService->getDatas($item->$method()->getUserCreat(),false));

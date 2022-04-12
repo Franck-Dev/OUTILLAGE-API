@@ -108,6 +108,11 @@ class Tool
      */
     private $division;
 
+    /**
+     * @Groups({"OT:read"})
+     */
+    private $listEquipement;
+
     public function __construct()
     {
         $this->sBOs = new ArrayCollection();
@@ -136,6 +141,18 @@ class Tool
     public function setDivision(array $division)
     {
         $this->division = $division;
+
+        return $this;
+    }
+
+    public function getListEquipement(): ?array
+    {
+        return $this->listEquipement;
+    }
+
+    public function setListEquipement(array $listEquipement)
+    {
+        $this->listEquipement = $listEquipement;
 
         return $this;
     }
