@@ -72,19 +72,36 @@ class MaintenanceItems
      */
     private $realisateur;
 
+        /**
+     * @Groups({"ItemMaint:read"})
+     */
+    private $porteur;
+
     public function __construct()
     {
         $this->maintenances = new ArrayCollection();
     }
 
-    public function getRealisateur(): ?string
+    public function getRealisateur(): ?array
     {
         return $this->realisateur;
     }
 
-    public function setRealisateur(string $realisateur): self
+    public function setRealisateur(array $realisateur): self
     {
-        $this->secteur = $realisateur;
+        $this->realisateur = $realisateur;
+
+        return $this;
+    }
+
+    public function getPorteur(): ?array
+    {
+        return $this->porteur;
+    }
+
+    public function setPorteur(array $porteur): self
+    {
+        $this->porteur = $porteur;
 
         return $this;
     }

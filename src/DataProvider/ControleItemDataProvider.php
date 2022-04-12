@@ -55,6 +55,19 @@ final class ControleItemDataProvider implements DenormalizedIdentifiersAwareItem
                     $item->setSiteUtil($site);
                 }
                 break;
+            case MaintenanceItems::class:
+                //Idem pour le responsable et le réalisateur
+                if ($item->getRespo())
+                {
+                    $user=$this->callAPIService->getDatas($item->getRespo(),false);
+                    $item->setPorteur($user);
+                }
+                if ($item->getUserReal())
+                {
+                    $user=$this->callAPIService->getDatas($item->getUserReal(),false);
+                    $item->setRealisateur($user);
+                }
+                break;
             default:
                 $item=$item->setDemandeur($this->callAPIService->getDatas($item->getUserCreat(),false));
                 break;

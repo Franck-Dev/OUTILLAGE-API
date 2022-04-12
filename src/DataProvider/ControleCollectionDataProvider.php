@@ -62,12 +62,24 @@ final class ControleCollectionDataProvider implements ContextAwareCollectionData
                 case Maintenance::class:
                     $user=$this->callAPIService->getDatas($item->getUserCreat(),false);
                     $item->setDemandeur($user);
-                    $user=$this->callAPIService->getDatas($item->getUserValideur(),false);
-                    $item->setValideur($user);
+                    if ($item->getUserValideur())
+                    {
+                        $user=$this->callAPIService->getDatas($item->getUserValideur(),false);
+                        $item->setValideur($user);
+                    }
                     break;
                 case MaintenanceItems::class:
-                    $user=$this->callAPIService->getDatas($item->getUserReal(),false);
-                    $item->setRealisateur($user);
+                    //Idem pour le responsable et le réalisateur
+                    if ($item->getRespo())
+                    {
+                        $user=$this->callAPIService->getDatas($item->getRespo(),false);
+                        $item->setPorteur($user);
+                    }
+                    if ($item->getUserReal())
+                    {
+                        $user=$this->callAPIService->getDatas($item->getUserReal(),false);
+                        $item->setRealisateur($user);
+                    }
                     break;
                 case SBO::class:
                     $user=$this->callAPIService->getDatas($item->getUserCreat(),false);
