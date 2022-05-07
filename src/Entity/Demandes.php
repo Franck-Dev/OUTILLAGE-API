@@ -13,6 +13,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ApiResource(
  *      normalizationContext={"groups"={"Dem:read"}},
  *      denormalizationContext={"groups"={"Dem:write"}},
+ *      attributes={"force_eager"=true},
  * )
  * @ApiFilter(
  *      SearchFilter::class,

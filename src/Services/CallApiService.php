@@ -39,7 +39,24 @@ class CallApiService
             'GET',
             $path.$url
         );
+        return $response->toArray();
+    }
 
+    public function getDatasUsers($apiToken=null): array
+    {
+        //dd($this->client);
+        $response = $this->client->request(
+            'GET',
+            'http://localhost:8000/api/users'
+        );
+        if ($apiToken){
+            foreach ($response->toArray() as $user) {
+                if ($user['apiToken'] == $apiToken)
+                {
+                    return $user;
+                }
+            }
+        }
         return $response->toArray();
     }
 }
