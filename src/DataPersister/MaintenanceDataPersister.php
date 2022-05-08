@@ -38,10 +38,12 @@ class MaintenanceDataPersister implements ContextAwareDataPersisterInterface
         // Si création on renvoie la date de création, sinon la date de modification
         if (!$data->getCreatedAt()) {
             $data->setCreatedAt(new \DateTimeImmutable());
+            $data->setUserCreat('/api/users/'.$this->_security->getUser()->getId());
             $this->_demande->NewDemande($data);
 
         } else {
             $data->setModifiedAt(new \DateTimeImmutable());
+            $data->setUserModif('/api/users/'.$this->_security->getUser()->getId());
             $this->_entityManager->persist($data);
             $this->_entityManager->flush();
         }

@@ -13,9 +13,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *      denormalizationContext={"groups"={"CT:write"}},
  *      collectionOperations={
  *              "get",
- *              "post"
+ *              "post"={"security"="is_granted('ROLE_USER')"}
  *      },
- *      itemOperations={"get","put","patch","delete"},
+ *      itemOperations={"get","put"={"security"="is_granted('ROLE_CE_OUTIL')"},
+ *                      "patch"={"security"="is_granted('ROLE_USER')"},
+ *                      "delete"={"security"="is_granted('ROLE_CE_OUTIL')"}},
  *      order={"id" ="DESC"}
  * )
  * @ORM\Entity(repositoryClass=ControleRepository::class)
@@ -69,13 +71,13 @@ class Controle
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"CT:read","CT:write","Dem:read"})
+     * @Groups({"CT:read","Dem:read"})
      */
     private $userCreat;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"CT:read","CT:write"})
+     * @Groups({"CT:read"})
      */
     private $userModif;
 
