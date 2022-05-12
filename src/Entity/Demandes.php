@@ -14,10 +14,18 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *      normalizationContext={"groups"={"Dem:read"}},
  *      denormalizationContext={"groups"={"Dem:write"}},
  *      attributes={"force_eager"=true},
+ *      order("DESC"),
+ * )
+ *  @ApiFilter(
+ *  SearchFilter::class,
+ *      properties={"id" : "exact","affectation" : "partial","groupeAffectation" : "partial"})
+ * @ApiFilter(
+ *  BooleanFilter::class, 
+ *      properties={"statut"}
  * )
  * @ApiFilter(
- *      SearchFilter::class,
- *          properties={"statut" : "exact","createdAt" : "exact"}
+ *  DateFilter::class, 
+ *      properties={"createdAt","datePlanif"}
  * )
  * @ORM\Entity(repositoryClass=DemandesRepository::class)
  */
